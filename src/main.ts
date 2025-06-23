@@ -5,17 +5,20 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe());
 
-   const config = new DocumentBuilder()
+  const config = new DocumentBuilder()
     .setTitle('Authorization')
     .setDescription('The Auth API description')
     .setVersion('1.0')
     .addTag('Register & Login')
     .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger_umidjon', app, documentFactory);
 
-  await app.listen(process.env.PORT ?? 3000, () => {console.log(`Server is running on ${process.env.PORT}`)});
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger_umidjon', app, document);
+
+  await app.listen(process.env.PORT ?? 3000, () =>
+    console.log(`Server is running on ${process.env.PORT ?? 3000}`),
+  );
 }
 bootstrap();

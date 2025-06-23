@@ -13,9 +13,9 @@ async function bootstrap() {
         .setVersion('1.0')
         .addTag('Register & Login')
         .build();
-    const documentFactory = () => swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('swagger_umidjon', app, documentFactory);
-    await app.listen(process.env.PORT ?? 3000, () => { console.log(`Server is running on ${process.env.PORT}`); });
+    const document = swagger_1.SwaggerModule.createDocument(app, config);
+    swagger_1.SwaggerModule.setup('swagger_umidjon', app, document);
+    await app.listen(process.env.PORT ?? 3000, () => console.log(`Server is running on ${process.env.PORT ?? 3000}`));
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
